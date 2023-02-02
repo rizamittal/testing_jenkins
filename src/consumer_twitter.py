@@ -151,9 +151,9 @@ while x == 0:
         # check if any messages have been sent
         if df.count() > 0:
                 # check if raw stock data table exists in hive and get offset if it does
-                if spark._jsparkSession.catalog().tableExists('raw_layer_db', 'twitter_data'):
+                if spark._jsparkSession.catalog().tableExists('curated_layer_db', 'twitter_data'):
                         # filter kafka message by max offset
-                        max_offset = spark.sql("select MAX(offset) from raw_layer_db.twitter_data")
+                        max_offset = spark.sql("select MAX(offset) from curated_layer_db.twitter_data")
                         df_filtered = df.filter(df.offset > max_offset.first()['max(offset)'])
 
 			# create word cloud string #
