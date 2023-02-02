@@ -164,29 +164,29 @@ while x == 0:
 			
                         if df_filtered.count() > 0: # only append if new messages exist
                                 time_of_msg = time.time()
-                                df_filtered.write.mode('append').format('hive').saveAsTable('raw_layer_db.twitter_data')
+                                df_filtered.write.mode('append').format('hive').saveAsTable('curated_layer_db.twitter_data1')
                                 formatted_df = create_df(df_filtered) # create formatted df
 
                                 #### check main formatted twitter data exists ####
-                                if spark._jsparkSession.catalog().tableExists('curated_layer_db', 'twitter_data'):
+                                if spark._jsparkSession.catalog().tableExists('curated_layer_db', 'twitter_data1'):
 					
-                                        formatted_df.write.mode('append').format('hive').saveAsTable('curated_layer_db.twitter_data')
+                                        formatted_df.write.mode('append').format('hive').saveAsTable('curated_layer_db.twitter_data1')
                                 else:
-                                        formatted_df.write.mode('overwrite').format('hive').saveAsTable('curated_layer_db.twitter_data')
+                                        formatted_df.write.mode('overwrite').format('hive').saveAsTable('curated_layer_db.twitter_data1')
 				
 				#### check wordcloud dataframe exists ####
-                                if spark._jsparkSession.catalog().tableExists('curated_layer_db', 'word_cloud'):
+                                if spark._jsparkSession.catalog().tableExists('curated_layer_db', 'word_cloud1'):
                                         word_cloud_df = spark.sparkContext.parallelize(word_list).toDF("string")
-                                        word_cloud_df.write.mode('append').format('hive').saveAsTable('curated_layer_db.word_cloud')
+                                        word_cloud_df.write.mode('append').format('hive').saveAsTable('curated_layer_db.word_cloud1')
                                 else:
                                         word_cloud_df = spark.sparkContext.parallelize(word_list).toDF("string")
-                                        word_cloud_df.write.mode('overwrite').format('hive').saveAsTable('curated_layer_db.word_cloud')
+                                        word_cloud_df.write.mode('overwrite').format('hive').saveAsTable('curated_layer_db.word_cloud1')
                                 
                                 #### check tweet rate dataframe exists ####
-                                if spark._jsparkSession.catalog().tableExists('curated_layer_db', 'word_cloud'):
-                                        tweet_rate_df.write.mode('append').format('hive').saveAsTable('curated_layer_db.tweet_rate')
+                                if spark._jsparkSession.catalog().tableExists('curated_layer_db', 'word_cloud1'):
+                                        tweet_rate_df.write.mode('append').format('hive').saveAsTable('curated_layer_db.tweet_rate1')
                                 else:
-                                        tweet_rate_df.write.mode('overwrite').format('hive').saveAsTable('curated_layer_db.tweet_rate')
+                                        tweet_rate_df.write.mode('overwrite').format('hive').saveAsTable('curated_layer_db.tweet_rate1')
 
 
 
