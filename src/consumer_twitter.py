@@ -148,7 +148,7 @@ while x == 0:
             .option("subscribe", "twitter_version_1") \
         .load()
 
-        # check if any messages have been sent
+        # check if any messages have been sent to hive
         if df.count() > 0:
                 # check if raw stock data table exists in hive and get offset if it does
                 if spark._jsparkSession.catalog().tableExists('curated_layer_db', 'twitter_data'):
